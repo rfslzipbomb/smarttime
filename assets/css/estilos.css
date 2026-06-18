@@ -208,31 +208,23 @@ body {
     font-size: 13px;
 }
 
-/* Bloques de Usuario Lateral Inferior */
+/* ==========================
+   USUARIO (BARRA LATERAL)
+========================== */
+
 .usuario, .usuario-lateral {
     display: flex;
     align-items: center;
     gap: 10px;
     border-top: 1px solid var(--color-borde);
     padding-top: 18px;
-}
-
-.foto {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.usuario-lateral img {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    object-fit: cover;
+    margin-top: auto; /* Empuja el bloque de usuario siempre hacia el fondo de la sidebar */
 }
 
 .usuario h4, .usuario-lateral h4 {
-    font-size: 13px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-texto);
 }
 
 .usuario p, .usuario-lateral p {
@@ -240,10 +232,14 @@ body {
     font-size: 12px;
 }
 
-.usuario-lateral span {
-    margin-left: auto;
+/* Selector para asegurar que la foto mantenga simetría perfecta */
+.usuario .foto, .usuario-lateral .foto {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--color-secundario); /* Opcional: Un sutil borde azul claro */
 }
-
 /* ==========================================================================
    5. ESTRUCTURA CENTRAL DE CONTENIDO Y TOPBAR
    ========================================================================== */

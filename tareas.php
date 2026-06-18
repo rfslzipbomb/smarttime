@@ -1,3 +1,11 @@
+<?php
+session_start();
+// Si la variable de sesión no existe, significa que el usuario no ha iniciado sesión
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: index.html?error=no_autenticado");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -45,15 +53,17 @@
                 <a href="consejos.html">Ver consejos ›</a>
             </div>
 
-            <div class="usuario-lateral">
-                <img src="assets/imagenes/perrito.webp" alt="Perfil">
-
+            
+            <div class="usuario">
+                <img src="<?php echo htmlspecialchars($usuario['foto']); ?>" class="foto" alt="Foto de perfil">
                 <div>
-                    <h4>soobodi</h4>
-                    <p>Colaborador</p>
+                    <h4>
+                        <?php echo htmlspecialchars($usuario['name']); ?>
+                    </h4>
+                    <p>
+                        <?php echo htmlspecialchars($usuario['email']); ?>
+                    </p>
                 </div>
-
-                <span>⌄</span>
             </div>
 
         </div>
@@ -73,8 +83,6 @@
                     🔔
                     <span>3</span>
                 </div>
-
-                <img src="assets/imagenes/perrito.webp" alt="Perfil">
 
                 <div>
                     <h4>Hola, soobodi</h4>

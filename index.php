@@ -228,68 +228,70 @@
                         <p class="text-muted">Accede a tu cuenta de Smart Time</p>
                     </div>
 
-                    <form>
+                    <form action="login.php" method="POST" class="needs-validation" novalidate>
+                    
                         <div class="mb-4">
                             <label for="username" class="form-label text-muted small fw-bold">Usuario o correo</label>
-                            <input type="text" class="form-control form-control-custom" id="username"
-                                placeholder="Ingresa tu usuario o correo">
+                            <input type="text" name="email" class="form-control form-control-custom" id="username"
+                                placeholder="Ingresa tu usuario o correo" required>
+                            <div class="invalid-feedback">Por favor, ingresa tu usuario o correo.</div>
                         </div>
+                    
                         <div class="mb-4">
                             <label for="password" class="form-label text-muted small fw-bold">Contraseña</label>
                             <div class="position-relative">
-                                <input type="password" class="form-control form-control-custom" id="password"
-                                    placeholder="Ingresa tu contraseña">
+                                <input type="password" name="password" class="form-control form-control-custom" id="password"
+                                    placeholder="Ingresa tu contraseña" required>
                                 <i class="bi bi-eye position-absolute end-0 top-50 translate-middle-y me-3 text-muted"
                                     style="cursor: pointer;"></i>
+                                <div class="invalid-feedback">Por favor, ingresa tu contraseña.</div>
                             </div>
                         </div>
-
+                    
                         <div class="d-flex justify-content-between align-items-center mb-5">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="rememberMe">
-
+                                <input class="form-check-input" type="checkbox" id="rememberMe" name="rememberMe">
                                 <label class="form-check-label text-muted small fw-bold" for="rememberMe">
                                     Recordarme
                                 </label>
                             </div>
                             <a href="#" class="text-primary text-decoration-none small fw-bold" data-bs-toggle="modal"
                                 data-bs-target="#resetPasswordModal">¿Olvidaste tu contraseña?</a>
-                            <div class="modal fade" id="resetPasswordModal" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content p-4" style="border-radius: 20px;">
-                                        <div class="modal-header border-0">
-                                            <h5 class="modal-title fw-bold fs-3">Recuperar Contraseña</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
+                        </div>
+                    
+                        <button type="submit" class="btn btn-st-primary w-100 mb-4">Iniciar sesión</button>
+                    </form>
+                    
+                    
+                    <div class="modal fade" id="resetPasswordModal" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content p-4" style="border-radius: 20px;">
+                                <div class="modal-header border-0">
+                                    <h5 class="modal-title fw-bold fs-3">Recuperar Contraseña</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="text-muted small">Ingresa tu correo electrónico y te enviaremos las instrucciones para
+                                        restablecer tu contraseña de forma local.</p>
+                    
+                                    <form class="needs-validation" novalidate id="formResetPassword" action="reset_password.php"
+                                        method="POST">
+                                        <div class="mb-3">
+                                            <label class="form-label text-muted small fw-bold">Correo Electrónico</label>
+                                            <input type="email" name="reset_email" class="form-control form-control-custom"
+                                                placeholder="correo@ejemplo.com" required>
+                                            <div class="invalid-feedback">Ingresa el correo asociado a tu cuenta.</div>
                                         </div>
-                                        <div class="modal-body">
-                                            <p class="text-muted small">Ingresa tu correo electrónico y te enviaremos
-                                                las instrucciones para restablecer tu contraseña de forma local.</p>
-
-                                            <form class="needs-validation" novalidate id="formResetPassword">
-                                                <div class="mb-3">
-                                                    <label class="form-label text-muted small fw-bold">Correo
-                                                        Electrónico</label>
-                                                    <input type="email" class="form-control form-control-custom"
-                                                        placeholder="correo@ejemplo.com" required>
-                                                    <div class="invalid-feedback">Ingresa el correo asociado a tu
-                                                        cuenta.</div>
-                                                </div>
-                                                <button type="submit" class="btn btn-st-primary w-100 mt-2">Enviar
-                                                    enlace de recuperación</button>
-                                            </form>
-
-                                            <div class="alert alert-success mt-3 d-none" id="resetAlert" role="alert">
-                                                <i class="bi bi-check-circle-fill me-2"></i> ¡Enlace enviado! Revisa tu
-                                                bandeja de entrada simulada.
-                                            </div>
-                                        </div>
+                                        <button type="submit" class="btn btn-st-primary w-100 mt-2">Enviar enlace de recuperación</button>
+                                    </form>
+                    
+                                    <div class="alert alert-success mt-3 d-none" id="resetAlert" role="alert">
+                                        <i class="bi bi-check-circle-fill me-2"></i> ¡Enlace enviado! Revisa tu bandeja de entrada simulada.
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <button type="submit" class="btn btn-st-primary w-100 mb-4">Iniciar sesión</button>
+                    </div>
 
                         <div class="text-center mb-4">
                             <p class="text-muted small">o continúa con</p>
@@ -309,32 +311,34 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form class="needs-validation" novalidate id="formRegister">
+                                        <form class="needs-validation" novalidate id="formRegister" action="registro.php" method="POST"
+                                            enctype="multipart/form-data">
                                             <div class="mb-3">
-                                                <label class="form-label text-muted small fw-bold">Nombre
-                                                    Completo</label>
-                                                <input type="text" class="form-control form-control-custom"
-                                                    placeholder="Ej. Juan Pérez" required>
+                                                <label class="form-label text-muted small fw-bold">Nombre Completo</label>
+                                                <input type="text" name="nombre" class="form-control form-control-custom" placeholder="Ej. Juan Pérez"
+                                                    required>
                                                 <div class="invalid-feedback">Por favor, ingresa tu nombre.</div>
                                             </div>
                                             <div class="mb-3">
-                                                <label class="form-label text-muted small fw-bold">Correo
-                                                    Electrónico</label>
-                                                <input type="email" class="form-control form-control-custom"
-                                                    placeholder="correo@ejemplo.com" required>
-                                                <div class="invalid-feedback">Ingresa un correo electrónico válido.
-                                                </div>
+                                                <label class="form-label text-muted small fw-bold">Correo Electrónico</label>
+                                                <input type="email" name="email" class="form-control form-control-custom" placeholder="correo@ejemplo.com"
+                                                    required>
+                                                <div class="invalid-feedback">Ingresa un correo electrónico válido.</div>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label text-muted small fw-bold">Contraseña</label>
-                                                <input type="password" class="form-control form-control-custom"
-                                                    id="regPassword" placeholder="Mínimo 6 caracteres" minlength="6"
-                                                    required>
-                                                <div class="invalid-feedback">La contraseña debe tener al menos 6
-                                                    caracteres.</div>
+                                                <input type="password" name="password" class="form-control form-control-custom" id="regPassword"
+                                                    placeholder="Mínimo 6 caracteres" minlength="6" required>
+                                                <div class="invalid-feedback">La contraseña debe tener al menos 6 caracteres.</div>
                                             </div>
-                                            <button type="submit" class="btn btn-st-primary w-100 mt-3">Registrarme en
-                                                Smart Time</button>
+                                            <div class="mb-3">
+                                                <label class="form-label text-muted small fw-bold">Foto de perfil (.jpg, .jpeg)</label>
+                                                <input type="file" name="foto_perfil" class="form-control form-control-custom" accept=".jpg, .jpeg"
+                                                    required>
+                                                <div class="invalid-feedback">Por favor, selecciona una foto de perfil válida.</div>
+                                                <div class="form-text text-muted small">Solo se admiten formatos JPG o JPEG.</div>
+                                            </div>
+                                            <button type="submit" class="btn btn-st-primary w-100 mt-3">Registrarme en Smart Time</button>
                                         </form>
                                     </div>
                                 </div>
