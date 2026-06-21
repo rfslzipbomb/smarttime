@@ -87,7 +87,7 @@ function mostrarTareasDelDia(fechaSeleccionada) {
             <div class="imagen-tarea">📋</div>
             <h3>No hay tareas para este día</h3>
             <p>Disfruta tu día o agrega nuevas tareas para mantenerte productivo.</p>
-            <a href="nueva_tarea.html" class="btn-agregar">+ Agregar tarea</a>
+            <a href="nueva_tarea.php" class="btn-agregar">+ Agregar tarea</a>
         `;
     } else {
         contenedor.innerHTML = "";

@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/php/session.php'; ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -24,9 +25,9 @@
             </div>
 
             <nav class="menu">
-                <a href="tareas.html">📋 Tareas</a>
-                <a href="calendario.html">📅 Calendario</a>
-                <a href="perfil.html" class="activo">👤 Perfil</a>
+                <a href="tareas.php">📋 Tareas</a>
+                <a href="calendario.php">📅 Calendario</a>
+                <a href="perfil.php" class="activo">👤 Perfil</a>
             </nav>
 
         </div>
@@ -49,14 +50,10 @@
 
             
             <div class="usuario">
-                <img src="<?php echo htmlspecialchars($usuario['foto']); ?>" class="foto" alt="Foto de perfil">
+                <img src="<?php echo htmlspecialchars($_SESSION['usuario_foto']); ?>" class="foto" alt="Foto de perfil">
                 <div>
-                    <h4>
-                        <?php echo htmlspecialchars($usuario['name']); ?>
-                    </h4>
-                    <p>
-                        <?php echo htmlspecialchars($usuario['email']); ?>
-                    </p>
+                    <h4><?php echo htmlspecialchars($_SESSION['usuario_name']); ?></h4>
+                    <p><?php echo htmlspecialchars($_SESSION['usuario_email']); ?></p>
                 </div>
             </div>
 
@@ -78,7 +75,7 @@
                 </div>
 
                 <div>
-                    <h4>Hola, soobodi</h4>
+                    <h4>Hola, <?php echo htmlspecialchars($_SESSION['usuario_name']); ?></h4>
                     <p>¡Que tengas un gran día! 👋</p>
                 </div>
 
@@ -89,13 +86,13 @@
         <section class="perfil-header">
 
             <div class="foto-perfil">
-                <img src="assets/imagenes/perrito.webp" alt="Foto de perfil">
+                <img src="<?php echo htmlspecialchars($_SESSION['usuario_foto']); ?>" alt="Foto de perfil">
                 <button>✎</button>
             </div>
 
             <div class="datos">
-                <h1>soobodi</h1>
-                <p>samjyolo27@gmail.com</p>
+                <h1><?php echo htmlspecialchars($_SESSION['usuario_name']); ?></h1>
+                <p><?php echo htmlspecialchars($_SESSION['usuario_email']); ?></p>
             </div>
 
             <div class="resumen">
@@ -118,7 +115,7 @@
 
         <section class="config-grid">
 
-            <div class="config-card">
+            <a href="ajustes.php" class="config-card" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
                 <div class="icono-config">⚙️</div>
 
                 <div>
@@ -130,7 +127,7 @@
                 </div>
 
                 <span>›</span>
-            </div>
+            </a>
 
             <div class="config-card">
                 <div class="icono-config">🔔</div>
@@ -176,9 +173,9 @@
 
         </section>
 
-        <button class="cerrar">Cerrar Sesión</button>
+        <button class="cerrar" onclick="window.location.href='php/logout.php'">Cerrar Sesión</button>
 
-        <a href="nueva_tarea.html" class="boton-flotante">+</a>
+        <a href="nueva_tarea.php" class="boton-flotante">+</a>
 
     </main>
 

@@ -38,5 +38,5 @@ formulario.addEventListener("submit", function(evento) {
 
     alert("Tarea guardada correctamente");
 
-    window.location.href = "calendario.html";
+    window.location.href = "calendario.php";
 });

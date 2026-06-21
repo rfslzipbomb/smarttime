@@ -1,11 +1,4 @@
-<?php
-session_start();
-// Si la variable de sesión no existe, significa que el usuario no ha iniciado sesión
-if (!isset($_SESSION['usuario_id'])) {
-    header("Location: index.html?error=no_autenticado");
-    exit();
-}
-?>
+<?php require_once __DIR__ . '/php/session.php'; ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -30,9 +23,9 @@ if (!isset($_SESSION['usuario_id'])) {
             </div>
 
             <nav class="menu">
-                <a href="tareas.html" class="activo">📋 Tareas</a>
-                <a href="calendario.html">📅 Calendario</a>
-                <a href="perfil.html">👤 Perfil</a>
+                <a href="tareas.php" class="activo">📋 Tareas</a>
+                <a href="calendario.php">📅 Calendario</a>
+                <a href="perfil.php">👤 Perfil</a>
             </nav>
 
         </div>
@@ -54,16 +47,12 @@ if (!isset($_SESSION['usuario_id'])) {
             </div>
 
             
-            <div class="usuario">
-                <img src="<?php echo htmlspecialchars($usuario['foto']); ?>" class="foto" alt="Foto de perfil">
+        <div class="usuario">
+            <img src="<?php echo htmlspecialchars($_SESSION['usuario_foto']); ?>" class="foto" alt="Foto de perfil">
                 <div>
-                    <h4>
-                        <?php echo htmlspecialchars($usuario['name']); ?>
-                    </h4>
-                    <p>
-                        <?php echo htmlspecialchars($usuario['email']); ?>
-                    </p>
-                </div>
+                        <h4><?php echo htmlspecialchars($_SESSION['usuario_name']); ?></h4>
+                       <p><?php echo htmlspecialchars($_SESSION['usuario_email']); ?></p>
+                  </div>
             </div>
 
         </div>
@@ -85,7 +74,7 @@ if (!isset($_SESSION['usuario_id'])) {
                 </div>
 
                 <div>
-                    <h4>Hola, soobodi</h4>
+                    <h4>Hola, <?php echo htmlspecialchars($_SESSION['usuario_name']); ?></h4>
                     <p>¡Que tengas un gran día! 👋</p>
                 </div>
 
@@ -94,7 +83,7 @@ if (!isset($_SESSION['usuario_id'])) {
         </header>
 
         <section class="titulo">
-            <h1>Hola, usuario</h1>
+            <h1>Hola, <?php echo htmlspecialchars($_SESSION['usuario_name']); ?></h1>
             <p>Organiza tu trabajo y cuida tu bienestar</p>
         </section>
 
@@ -122,7 +111,7 @@ if (!isset($_SESSION['usuario_id'])) {
 
         </section>
 
-        <a href="nueva_tarea.html" class="boton-flotante">+</a>
+        <a href="nueva_tarea.php" class="boton-flotante">+</a>
 
     </main>
     <script src="assets/js/tareas.js"></script>

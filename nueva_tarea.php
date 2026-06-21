@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/php/session.php'; ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -22,9 +23,9 @@
             </div>
 
             <nav class="menu">
-                <a href="tareas.html" class="activo">📋 Tareas</a>
-                <a href="calendario.html">📅 Calendario</a>
-                <a href="perfil.html">👤 Perfil</a>
+                <a href="tareas.php" class="activo">📋 Tareas</a>
+                <a href="calendario.php">📅 Calendario</a>
+                <a href="perfil.php">👤 Perfil</a>
             </nav>
 
         </div>
@@ -47,14 +48,10 @@
 
             
             <div class="usuario">
-                <img src="<?php echo htmlspecialchars($usuario['foto']); ?>" class="foto" alt="Foto de perfil">
+                <img src="<?php echo htmlspecialchars($_SESSION['usuario_foto']); ?>" class="foto" alt="Foto de perfil">
                 <div>
-                    <h4>
-                        <?php echo htmlspecialchars($usuario['name']); ?>
-                    </h4>
-                    <p>
-                        <?php echo htmlspecialchars($usuario['email']); ?>
-                    </p>
+                    <h4><?php echo htmlspecialchars($_SESSION['usuario_name']); ?></h4>
+                    <p><?php echo htmlspecialchars($_SESSION['usuario_email']); ?></p>
                 </div>
             </div>
         </div>
@@ -63,7 +60,7 @@
     <main class="contenido">
 
         <header class="superior">
-            <a href="calendario.html" class="volver">
+            <a href="calendario.php" class="volver">
     <span>←</span>
     Volver al Calendario
 </a>
@@ -78,7 +75,7 @@
                 </div>
 
                 <div>
-                    <h4>Hola, soobodi</h4>
+                    <h4>Hola, <?php echo htmlspecialchars($_SESSION['usuario_name']); ?></h4>
                     <p>¡Que tengas un gran día! 👋</p>
                 </div>
 

@@ -228,39 +228,39 @@
                         <p class="text-muted">Accede a tu cuenta de Smart Time</p>
                     </div>
 
-                    <form action="login.php" method="POST" class="needs-validation" novalidate>
-                    
-                        <div class="mb-4">
-                            <label for="username" class="form-label text-muted small fw-bold">Usuario o correo</label>
-                            <input type="text" name="email" class="form-control form-control-custom" id="username"
-                                placeholder="Ingresa tu usuario o correo" required>
-                            <div class="invalid-feedback">Por favor, ingresa tu usuario o correo.</div>
-                        </div>
-                    
-                        <div class="mb-4">
-                            <label for="password" class="form-label text-muted small fw-bold">Contraseña</label>
-                            <div class="position-relative">
-                                <input type="password" name="password" class="form-control form-control-custom" id="password"
-                                    placeholder="Ingresa tu contraseña" required>
-                                <i class="bi bi-eye position-absolute end-0 top-50 translate-middle-y me-3 text-muted"
-                                    style="cursor: pointer;"></i>
-                                <div class="invalid-feedback">Por favor, ingresa tu contraseña.</div>
-                            </div>
-                        </div>
-                    
-                        <div class="d-flex justify-content-between align-items-center mb-5">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="rememberMe" name="rememberMe">
-                                <label class="form-check-label text-muted small fw-bold" for="rememberMe">
-                                    Recordarme
-                                </label>
-                            </div>
-                            <a href="#" class="text-primary text-decoration-none small fw-bold" data-bs-toggle="modal"
-                                data-bs-target="#resetPasswordModal">¿Olvidaste tu contraseña?</a>
-                        </div>
-                    
-                        <button type="submit" class="btn btn-st-primary w-100 mb-4">Iniciar sesión</button>
-                    </form>
+<form action="php/login.php" method="POST" class="needs-validation" novalidate>
+    
+    <div class="mb-4">
+        <label for="username" class="form-label text-muted small fw-bold">Usuario o correo</label>
+        <input type="text" name="email" class="form-control form-control-custom" id="username"
+            placeholder="Ingresa tu usuario o correo" required>
+        <div class="invalid-feedback">Por favor, ingresa tu usuario o correo.</div>
+    </div>
+    
+    <div class="mb-4">
+        <label for="password" class="form-label text-muted small fw-bold">Contraseña</label>
+        <div class="position-relative">
+            <input type="password" name="password" class="form-control form-control-custom" id="password"
+                placeholder="Ingresa tu contraseña" required>
+            <i class="bi bi-eye position-absolute end-0 top-50 translate-middle-y me-3 text-muted"
+                style="cursor: pointer;"></i>
+            <div class="invalid-feedback">Por favor, ingresa tu contraseña.</div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="rememberMe">
+            <label class="form-check-label text-muted small fw-bold" for="rememberMe">
+                Recordarme
+            </label>
+        </div>
+        <a href="#" class="text-primary text-decoration-none small fw-bold" data-bs-toggle="modal"
+            data-bs-target="#resetPasswordModal">¿Olvidaste tu contraseña?</a>
+    </div>
+
+    <button type="submit" class="btn btn-st-primary w-100 mb-4">Iniciar sesión</button>
+</form>
                     
                     
                     <div class="modal fade" id="resetPasswordModal" tabindex="-1" aria-hidden="true">
@@ -311,7 +311,7 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form class="needs-validation" novalidate id="formRegister" action="registro.php" method="POST"
+                                        <form class="needs-validation" novalidate id="formRegister" action="php/registro.php" method="POST"
                                             enctype="multipart/form-data">
                                             <div class="mb-3">
                                                 <label class="form-label text-muted small fw-bold">Nombre Completo</label>

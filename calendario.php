@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/php/session.php'; ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -22,9 +23,9 @@
             </div>
 
             <nav class="menu">
-                <a href="tareas.html">📋 Tareas</a>
-                <a href="calendario.html" class="activo">📅 Calendario</a>
-                <a href="perfil.html">👤 Perfil</a>
+                <a href="tareas.php">📋 Tareas</a>
+                <a href="calendario.php" class="activo">📅 Calendario</a>
+                <a href="perfil.php">👤 Perfil</a>
             </nav>
 
         </div>
@@ -46,14 +47,10 @@
             </div>
 
             <div class="usuario">
-                <img src="<?php echo htmlspecialchars($usuario['foto']); ?>" class="foto" alt="Foto de perfil">
+                <img src="<?php echo htmlspecialchars($_SESSION['usuario_foto']); ?>" class="foto" alt="Foto de perfil">
                 <div>
-                    <h4>
-                        <?php echo htmlspecialchars($usuario['name']); ?>
-                    </h4>
-                    <p>
-                        <?php echo htmlspecialchars($usuario['email']); ?>
-                    </p>
+                    <h4><?php echo htmlspecialchars($_SESSION['usuario_name']); ?></h4>
+                    <p><?php echo htmlspecialchars($_SESSION['usuario_email']); ?></p>
                 </div>
             </div>
 
@@ -75,7 +72,7 @@
                     <span>3</span>
                 </div>
                 <div>
-                    <h4>Hola, soobodi</h4>
+                    <h4>Hola, <?php echo htmlspecialchars($_SESSION['usuario_name']); ?></h4>
                     <p>¡Que tengas un gran día! 👋</p>
                 </div>
 
@@ -128,14 +125,14 @@
                     <div class="imagen-tarea">📋</div>
                     <h3>No hay tareas para este día</h3>
                     <p>Disfruta tu día o agrega nuevas tareas para mantenerte productivo.</p>
-                    <a href="nueva_tarea.html" class="btn-agregar">+ Agregar tarea</a>
+                    <a href="nueva_tarea.php" class="btn-agregar">+ Agregar tarea</a>
                 </div>
 
             </div>
 
         </section>
 
-        <a href="nueva_tarea.html" class="boton-flotante">+</a>
+        <a href="nueva_tarea.php" class="boton-flotante">+</a>
 
     </main>
 
