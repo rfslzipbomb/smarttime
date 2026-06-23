@@ -24,6 +24,36 @@ try {
         created_at TEXT DEFAULT CURRENT_TIMESTAMP
     )");
 
+    // Creamos la tabla de tareas
+    $conn->exec("CREATE TABLE IF NOT EXISTS tareas (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER NOT NULL,
+        titulo TEXT NOT NULL,
+        categoria TEXT NOT NULL,
+        fecha TEXT NOT NULL,
+        hora TEXT,
+        descripcion TEXT,
+        estado TEXT DEFAULT 'pendiente',
+        created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (user_id) REFERENCES users(id)
+    )");
+    // Creamos la tabla de eventos
+    $conn->exec("CREATE TABLE IF NOT EXISTS eventos (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER NOT NULL,
+        titulo TEXT NOT NULL,
+        tipo TEXT NOT NULL,
+        ubicacion TEXT,
+        vestimenta TEXT,
+        fecha TEXT NOT NULL,
+        hora_inicio TEXT,
+        hora_fin TEXT,
+        detalles TEXT,
+        estado TEXT DEFAULT 'pendiente', 
+        created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (user_id) REFERENCES users(id)
+    )");
+
 } catch(PDOException $e) {
     die("Error crítico de base de datos: " . $e->getMessage());
 }

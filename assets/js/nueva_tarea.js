@@ -14,7 +14,8 @@ botonesCategoria.forEach(function(boton) {
 
 const formulario = document.getElementById("form-tarea");
 
-formulario.addEventListener("submit", function(evento) {
+// Agregamos 'async' para poder usar 'await' en la petición fetch
+formulario.addEventListener("submit", async function(evento) {
     evento.preventDefault();
 
     const titulo = document.getElementById("titulo").value;
@@ -30,13 +31,31 @@ formulario.addEventListener("submit", function(evento) {
         descripcion: descripcion
     };
 
-    let tareas = JSON.parse(localStorage.getItem("tareas")) || [];
+    try {
+        // En lugar de localStorage, enviamos los datos al servidor PHP
+        const respuesta = await fetch("php/crear_tarea.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(nuevaTarea)
+        });
 
-    tareas.push(nuevaTarea);
+        const resultado = await respuesta.json();
 
-    localStorage.setItem("tareas", JSON.stringify(tareas));
+        if (resultado.success) {
+            alert("Tarea guardada correctamente");
+            window.location.href = "calendario.php"; 
+        } else if (resultado.es_conflicto) {
+            // Si el servidor detectó un conflicto, disparamos el modal
+            document.getElementById('texto-conflicto').innerHTML = resultado.message + "<br><br>Por favor, selecciona otra hora o fecha.";
+            document.getElementById('modal-conflicto').style.display = 'flex';
+        } else {
+            alert("Error al guardar: " + resultado.message);
+        }
 
-    alert("Tarea guardada correctamente");
-
-    window.location.href = "calendario.php";
+    } catch (error) {
+        console.error("Error en la comunicación con el servidor:", error);
+        alert("Hubo un problema de conexión.");
+    }
 });

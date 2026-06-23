@@ -1,4 +1,32 @@
-<?php require_once __DIR__ . '/php/session.php'; ?>
+<?php 
+require_once __DIR__ . '/php/session.php'; 
+require_once __DIR__ . '/config/database.php';
+
+// Contar métricas del usuario actual
+$user_id = $_SESSION['usuario_id'];
+
+// Pendientes (Tareas + Eventos)
+$stmt_pendientes = $conn->prepare("
+    SELECT SUM(total) as pendientes FROM (
+        SELECT COUNT(*) as total FROM tareas WHERE user_id = :uid AND estado = 'pendiente'
+        UNION ALL
+        SELECT COUNT(*) as total FROM eventos WHERE user_id = :uid AND estado = 'pendiente'
+    )
+");
+$stmt_pendientes->execute([':uid' => $user_id]);
+$total_pendientes = $stmt_pendientes->fetchColumn() ?: 0;
+
+// Completadas (Tareas + Eventos)
+$stmt_completadas = $conn->prepare("
+    SELECT SUM(total) as completadas FROM (
+        SELECT COUNT(*) as total FROM tareas WHERE user_id = :uid AND estado = 'completada'
+        UNION ALL
+        SELECT COUNT(*) as total FROM eventos WHERE user_id = :uid AND estado = 'completada'
+    )
+");
+$stmt_completadas->execute([':uid' => $user_id]);
+$total_completadas = $stmt_completadas->fetchColumn() ?: 0;
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,43 +40,25 @@
 <div class="app">
 
        <aside class="sidebar">
-
         <div>
-
             <div class="logo">
                 <img src="assets/imagenes/logo.png" alt="Logo Smart Time" class="logo-img">
-
                 <div>
                     <h2>Smart <span>Time</span></h2>
                     <p>Agenda Profesional Inteligente</p>
                 </div>
             </div>
-
             <nav class="menu">
                 <a href="tareas.php">📋 Tareas</a>
+                <a href="nuevo_evento.php">🎉 Eventos</a>
                 <a href="calendario.php">📅 Calendario</a>
+                <!-- NUEVO ENLACE AL MENÚ -->
+                <a href="consejos.php">🌱 Bienestar</a>
                 <a href="perfil.php" class="activo">👤 Perfil</a>
             </nav>
-
         </div>
-
         <div>
-
-            <div class="bienestar">
-                <div class="icono">♡</div>
-
-                <h4>Bienestar en tu jornada</h4>
-
-                <p>
-                    Recuerda tomar pausas,
-                    beber agua y mantener
-                    hábitos saludables.
-                </p>
-
-                <a href="consejos.html">Ver consejos ›</a>
-            </div>
-
-            
+            <!-- EL BLOQUE DE BIENESTAR ESTÁTICO FUE ELIMINADO DE AQUÍ -->
             <div class="usuario">
                 <img src="<?php echo htmlspecialchars($_SESSION['usuario_foto']); ?>" class="foto" alt="Foto de perfil">
                 <div>
@@ -56,9 +66,7 @@
                     <p><?php echo htmlspecialchars($_SESSION['usuario_email']); ?></p>
                 </div>
             </div>
-
         </div>
-
     </aside>
 
     <main class="contenido">
@@ -69,9 +77,17 @@
 
             <div class="top-user">
 
-                <div class="campana">
-                    🔔
-                    <span>3</span>
+                <div class="campana-contenedor" id="btn-campana">
+                    <div class="campana">
+                        🔔
+                        <span id="contador-campana" style="display:none;">0</span>
+                    </div>
+                    
+                    <div class="dropdown-notificaciones" id="dropdown-notificaciones">
+                        <h4>Notificaciones</h4>
+                        <div id="lista-notificaciones">
+                            </div>
+                    </div>
                 </div>
 
                 <div>
@@ -95,18 +111,15 @@
                 <p><?php echo htmlspecialchars($_SESSION['usuario_email']); ?></p>
             </div>
 
-            <div class="resumen">
-
+           <div class="resumen">
                 <div class="card-numero">
-                    <h2>1</h2>
+                    <h2><?php echo $total_pendientes; ?></h2>
                     <p>Pendientes</p>
                 </div>
-
                 <div class="card-numero">
-                    <h2>0</h2>
+                    <h2 style="color: #10b981;"><?php echo $total_completadas; ?></h2>
                     <p>Completadas</p>
                 </div>
-
             </div>
 
         </section>
@@ -143,21 +156,16 @@
                 <span>›</span>
             </div>
 
-            <div class="config-card">
+            <a href="ayuda.php" class="config-card" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
                 <div class="icono-config">❓</div>
-
                 <div>
                     <h3>Ayuda y Soporte</h3>
-                    <p>
-                        Obtén ayuda y encuentra respuestas
-                        a tus preguntas frecuentes.
-                    </p>
+                    <p>Obtén ayuda y encuentra respuestas a tus preguntas frecuentes.</p>
                 </div>
-
                 <span>›</span>
-            </div>
+            </a>
 
-            <div class="config-card">
+            <a href="privacidad.php" class="config-card" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
                 <div class="icono-config">🛡️</div>
 
                 <div>
@@ -169,7 +177,7 @@
                 </div>
 
                 <span>›</span>
-            </div>
+            </a>
 
         </section>
 
@@ -180,6 +188,6 @@
     </main>
 
 </div>
-
+<script src="assets/js/topbar.js"></script>
 </body>
 </html>

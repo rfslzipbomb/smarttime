@@ -1,0 +1,24 @@
+# 1. Base de datos SQLite
+/database/*.sqlite
+/database/*.db
+
+# 2. Archivos subidos por los usuarios (Fotos de perfil)
+/php/uploads/*
+!/php/uploads/.gitkeep
+
+# 3. Sesiones de PHP locales
+/sessions/*
+!/sessions/.gitkeep
+
+# 4. Archivos temporales y de caché del sistema operativo
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# 5. Carpetas de configuración del editor de código (VS Code, etc.)
+.vscode/
+.idea/
+
+# 6. Registros de errores de PHP
+error_log
+*.log

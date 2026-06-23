@@ -73,9 +73,22 @@
             </div>
             <nav class="menu">
                 <a href="tareas.php">📋 Tareas</a>
+                <a href="nuevo_evento.php">🎉 Eventos</a>
                 <a href="calendario.php">📅 Calendario</a>
+                <!-- NUEVO ENLACE AL MENÚ -->
+                <a href="consejos.php">🌱 Bienestar</a>
                 <a href="perfil.php" class="activo">👤 Perfil</a>
             </nav>
+        </div>
+        <div>
+            <!-- EL BLOQUE DE BIENESTAR ESTÁTICO FUE ELIMINADO DE AQUÍ -->
+            <div class="usuario">
+                <img src="<?php echo htmlspecialchars($_SESSION['usuario_foto']); ?>" class="foto" alt="Foto de perfil">
+                <div>
+                    <h4><?php echo htmlspecialchars($_SESSION['usuario_name']); ?></h4>
+                    <p><?php echo htmlspecialchars($_SESSION['usuario_email']); ?></p>
+                </div>
+            </div>
         </div>
     </aside>
 
@@ -136,5 +149,6 @@
 
 </div>
 
+<script src="assets/js/topbar.js"></script>
 </body>
 </html>

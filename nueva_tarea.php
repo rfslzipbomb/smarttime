@@ -10,43 +10,25 @@
 <body>
 
        <aside class="sidebar">
-
         <div>
-
             <div class="logo">
                 <img src="assets/imagenes/logo.png" alt="Logo Smart Time" class="logo-img">
-
                 <div>
                     <h2>Smart <span>Time</span></h2>
                     <p>Agenda Profesional Inteligente</p>
                 </div>
             </div>
-
             <nav class="menu">
                 <a href="tareas.php" class="activo">📋 Tareas</a>
+                <a href="nuevo_evento.php">🎉 Eventos</a>
                 <a href="calendario.php">📅 Calendario</a>
+                <!-- NUEVO ENLACE AL MENÚ -->
+                <a href="consejos.php">🌱 Bienestar</a>
                 <a href="perfil.php">👤 Perfil</a>
             </nav>
-
         </div>
-
         <div>
-
-            <div class="bienestar">
-                <div class="icono">♡</div>
-
-                <h4>Bienestar en tu jornada</h4>
-
-                <p>
-                    Recuerda tomar pausas,
-                    beber agua y mantener
-                    hábitos saludables.
-                </p>
-
-                <a href="consejos.html">Ver consejos ›</a>
-            </div>
-
-            
+            <!-- EL BLOQUE DE BIENESTAR ESTÁTICO FUE ELIMINADO DE AQUÍ -->
             <div class="usuario">
                 <img src="<?php echo htmlspecialchars($_SESSION['usuario_foto']); ?>" class="foto" alt="Foto de perfil">
                 <div>
@@ -55,7 +37,6 @@
                 </div>
             </div>
         </div>
-
     </aside>
     <main class="contenido">
 
@@ -69,9 +50,17 @@
 
             <div class="top-user">
 
-                <div class="campana">
-                    🔔
-                    <span>3</span>
+               <div class="campana-contenedor" id="btn-campana">
+                    <div class="campana">
+                        🔔
+                        <span id="contador-campana" style="display:none;">0</span>
+                    </div>
+                    
+                    <div class="dropdown-notificaciones" id="dropdown-notificaciones">
+                        <h4>Notificaciones</h4>
+                        <div id="lista-notificaciones">
+                            </div>
+                    </div>
                 </div>
 
                 <div>
@@ -133,6 +122,14 @@
 </main>
 
 <script src="assets/js/nueva_tarea.js"></script>
-
+<script src="assets/js/topbar.js"></script>
+<div class="modal-conflicto" id="modal-conflicto">
+    <div class="modal-conflicto-contenido">
+        <div class="icono-error-modal">⚠️</div>
+        <h2 style="margin-bottom: 10px;">Conflicto de Horario</h2>
+        <p id="texto-conflicto" style="color: var(--color-texto-secundario); font-size: 15px; line-height: 1.5;"></p>
+        <button class="btn-entendido" onclick="document.getElementById('modal-conflicto').style.display='none'">Entendido</button>
+    </div>
+</div>
 </body>
 </html>
