@@ -134,10 +134,10 @@
                 <input type="password" id="password" name="password" placeholder="Escribe tu nueva contraseña">
             </div>
 
-            <div class="form-grupo">
+            <<div class="form-grupo">
                 <label for="foto_perfil">Foto de Perfil <small>(Solo JPG/JPEG. Deja en blanco para mantener la actual)</small></label>
                 <br>
-                <img src="<?php echo htmlspecialchars($_SESSION['usuario_foto']); ?>" alt="Foto actual" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; margin-bottom: 10px;">
+                <img id="preview-foto" src="<?php echo htmlspecialchars($_SESSION['usuario_foto']); ?>" alt="Foto actual" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; margin-bottom: 10px;">
                 <input type="file" id="foto_perfil" name="foto_perfil" accept=".jpg, .jpeg">
             </div>
 
@@ -148,7 +148,28 @@
     </main>
 
 </div>
+</main>
+
+</div>
+
+<script>
+    document.getElementById('foto_perfil').addEventListener('change', function(event) {
+        const archivoSeleccionado = event.target.files[0];
+        
+        if (archivoSeleccionado) {
+            // Validamos por seguridad que el archivo seleccionado sea una imagen
+            if (archivoSeleccionado.type.startsWith('image/')) {
+                // Creamos una URL local temporal para la imagen
+                const urlImagen = URL.createObjectURL(archivoSeleccionado);
+                
+                // Cambiamos el atributo 'src' de la imagen para mostrar la previsualización
+                document.getElementById('preview-foto').src = urlImagen;
+            }
+        }
+    });
+</script>
 
 <script src="assets/js/topbar.js"></script>
+
 </body>
 </html>
